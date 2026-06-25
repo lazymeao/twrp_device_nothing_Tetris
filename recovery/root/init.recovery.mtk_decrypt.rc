@@ -1,0 +1,62 @@
+import /trustonic.rc
+import /tee.rc
+
+on init
+    export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
+    setprop crypto.ready 1
+
+on fs
+    install_keyring
+    wait /dev/block/platform/soc/112b0000.ufshci
+    symlink /dev/block/platform/soc/112b0000.ufshci /dev/block/bootdevice
+
+# We need vold early for metadata encryption
+on early-fs
+    start vold
+
+service vendor.gatekeeper-default /vendor/bin/hw/android.hardware.gatekeeper-service.trustonic
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+service vendor.keymint-trustonic /vendor/bin/hw/android.hardware.security.keymint@3.0-service.trustonic
+    class early_hal
+    user nobody
+    seclabel u:r:recovery:s0
+
+on property:ro.vendor.trustonic.ready=true
+    start vendor.gatekeeper-default
+
+on property:crypto.ready=1
+    start vendor.keymint-trustonic
+
+on property:hwservicemanager.ready=true
+    start mobicore
+    start vendor.gatekeeper-default
+    start vendor.keymint-trustonic
+
+on property:ro.crypto.state=unsupported
+    stop mobicore
+    stop vendor.gatekeeper-default
+    stop vendor.keymint-trustonic
+
+on property:ro.crypto.state=unencrypted
+    stop mobicore
+    stop vendor.gatekeeper-default
+    stop vendor.keymint-trustonic
+
+on property:twrp.decrypt.done=true
+    stop mobicore
+    stop vendor.gatekeeper-default
+    stop vendor.keymint-trustonic
+
+on property:crypto.ready=0
+    stop mobicore
+    stop vendor.gatekeeper-default
+    stop vendor.keymint-trustonic
+
+on post-fs-data
+    mkdir /data/vendor_de 0770 system system
+    mkdir /data/vendor_de/0 0770 system system
+    mkdir /data/vendor_de/0/cryptoeng 0770 system system

@@ -3,8 +3,7 @@
 # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
 
 #<mnt_point>        <type>    <device>                            <device2>                         <mnt_flags and options>
-/metadata           f2fs      /dev/block/by-name/metadata                                           flags=display="metadata";backup=1
-/data               f2fs      /dev/block/by-name/userdata                                           flags=fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption
+/metadata           ext4      /dev/block/by-name/metadata                                           flags=display="metadata";backup=1
 /cache              ext4      /dev/block/by-name/rescue                                             flags=display="cache";wipeingui;wipeduringfactoryreset
 
 # Boot

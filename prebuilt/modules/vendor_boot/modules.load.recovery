@@ -14,7 +14,6 @@ nvmem_mtk-devinfo.ko
 mtk_wdt.ko
 timer-mediatek.ko
 sec-rng.ko
-sec.ko
 device-apc-common.ko
 device-apc-mt6878.ko
 pinctrl-mtk-v2.ko
@@ -62,7 +61,6 @@ iommu_debug.ko
 iommu_secure.ko
 mtk_iommu.ko
 system_heap.ko
-nothing_error_report.ko
 mtk-mminfra-debug.ko
 mtk-mminfra-imax.ko
 mtk-cmdq-drv-ext.ko
@@ -74,9 +72,6 @@ mtk-mml-mt6878.ko
 drm_dma_helper.ko
 mtk_panel_ext.ko
 panel-samsung-s6e8fc3x02.ko
-panel-rm69220-boe.ko
-panel-rm69220-vxn.ko
-panel-epd8820-boe.ko
 panel-alpha-jdi-nt36672e-vdo-60hz.ko
 panel-alpha-jdi-nt36672e-vdo-120hz.ko
 panel-alpha-jdi-nt36672e-vdo-120hz-threshold.ko
@@ -89,7 +84,6 @@ panel-nt37801-cmd-120hz.ko
 panel-nt37801-cmd-spr.ko
 panel-samsung-ana6705-cmd.ko
 panel-nt37701a-cmd.ko
-panel-vdtr6130-fhdp-dsi-cmd-dphy-120hz-csot.ko
 mediatek-drm-gateic.ko
 mediatek-drm-panel-drv.ko
 drm_display_helper.ko
@@ -163,7 +157,6 @@ mt6375-battery.ko
 nt_usb_ts.ko
 nt_chg.ko
 pwm-mtk-disp.ko
-mtk_bp_thl.ko
 leds-mtk.ko
 leds-mtk-disp.ko
 leds-mtk-pwm.ko
@@ -199,6 +192,8 @@ mtk_rpmsg_mbox.ko
 mtk-mbox.ko
 mtk_tinysys_ipi.ko
 mtk-mmdvfs-v3-start.ko
+sec.ko
 haptic.ko
-haptic_sfdc.ko
-noth_leds.ko
+bootinfo.ko
+focaltech_tp.ko
+hbt.ko

@@ -1,4 +1,4 @@
-import /init.recovery.project.rc
+import /init.recovery.mtk_decrypt.rc
 
 on init
     setprop sys.usb.configfs 1
@@ -11,17 +11,11 @@ on init
     symlink /dev/block/by-name /dev/block/bootdevice/by-name
 
 on boot
-    mkdir /metadata 0771 system system
-    wait /dev/block/by-name/metadata 10
-    mount f2fs /dev/block/by-name/metadata /metadata noatime nosuid nodev sync
     insmod /lib/modules/mtk_disp_notify.ko
     insmod /lib/modules/mediatek-drm-panel-drv.ko
     insmod /lib/modules/sc8541_charger.ko
     insmod /lib/modules/upm6720_charger.ko
-    insmod /lib/modules/nu2115_charger.ko
-    insmod /lib/modules/sgm41606S_charger.ko
     insmod /lib/modules/bootinfo.ko
-    insmod /lib/modules/touchpanel_event_notify.ko
     insmod /lib/modules/hbt.ko
     insmod /lib/modules/focaltech_tp.ko
 

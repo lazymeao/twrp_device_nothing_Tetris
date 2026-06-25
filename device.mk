@@ -84,20 +84,26 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     fastbootd
 
-# Gatekeeper
+# Keymaster
 PRODUCT_PACKAGES += \
-	android.hardware.gatekeeper@1.0-service
+    android.hardware.keymaster@4.1
+	
+# Security
+PRODUCT_PACKAGES += \
+    android.hardware.security.keymint \
+    android.hardware.security.secureclock \
+    android.hardware.security.sharedsecret
 
-# Additional Libraries
+# Keystore Hal
+PRODUCT_PACKAGES += \
+    android.system.keystore2
+
+# Additional configs
+TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
+    $(TARGET_OUT_SHARED_LIBRARIES)/android.hardware.keymaster@4.1
+
 TARGET_RECOVERY_DEVICE_MODULES += \
-    libkeymaster4 \
-    libkeymaster41 \
-    libpuresoftkeymasterdevice
-
-RECOVERY_LIBRARY_SOURCE_FILES += \
-    $(TARGET_OUT_SHARED_LIBRARIES)/libkeymaster4.so \
-    $(TARGET_OUT_SHARED_LIBRARIES)/libkeymaster41.so \
-    $(TARGET_OUT_SHARED_LIBRARIES)/libpuresoftkeymasterdevice.so
+    android.hardware.keymaster@4.1
 
 # Rootdir
 PRODUCT_PACKAGES += \
